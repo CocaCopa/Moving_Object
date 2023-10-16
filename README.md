@@ -1,7 +1,7 @@
 # Moving_Object
---------------------------------------------------------------------
---------------------------- HOW TO SETUP ---------------------------
---------------------------------------------------------------------
+-------------
+HOW TO SETUP
+-------------
 1. Drag and drop the 'MovingObject' prefab in the scene.
 
 2. Add a (e.g. platform) as a child of the 'MovingObject' scene GameObject. (It's best not to modify the provided prefab)
@@ -13,9 +13,9 @@
 4. To save your new 'MovingObject' create an original prefab.
 
 
---------------------------------------------------------------------
+---------
 SCRIPTING
---------------------------------------------------------------------
+---------
 MovingObject class provides the following properties:
 
 1. ObjectTransform  -> The transform of the assigned moving object. (It's best not to alter this reference at runtime)
@@ -35,9 +35,9 @@ All of these functions contain a summary to make it easier to understand their p
 
 
 
---------------------------------------------------------------------
---------------------------------- NOTES ---------------------------------
---------------------------------------------------------------------
+-----
+NOTES
+-----
 1. Do not remove the 'MovingObjectGizmos' script from the provided 'MovingObject' prefab, as it contains the code responsible
    for visualizing the path of the object, based on the given checkpoints.
       
