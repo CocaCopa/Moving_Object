@@ -6,13 +6,13 @@ using System.Linq;
 public class MovingObject : MonoBehaviour {
 
     private enum MovementType { Circle, PingPong };
-    [Tooltip("This helps the editor script to automatically assign any new created checkpoints to the 'Points' list")]
-    [SerializeField] private Transform checkpointsHolderTransform;
+    [Tooltip("The transform of the moving object")]
+    [SerializeField] private Transform objectTransform;
     [Space(10)]
     [Tooltip("Select between different movement types")]
     [SerializeField] private MovementType movementType;
-    [Tooltip("The transform of the moving object")]
-    [SerializeField] private Transform objectTransform;
+    [Tooltip("The motion curve of the object")]
+    [SerializeField] private AnimationCurve motionCurve = AnimationCurve.Linear(0, 0, 1, 1);
     [Tooltip("Speed of the platform in m/s")]
     [SerializeField] private float platformSpeed;
     [Tooltip("How long should the object wait once it reaches a checkpoint")]
@@ -20,7 +20,6 @@ public class MovingObject : MonoBehaviour {
     [Tooltip("Checkpoints of the platform")]
     [SerializeField] private List<Transform> points;
 
-    private AnimationCurve motionCurve = AnimationCurve.Linear(0, 0, 1, 1);
     private float motionCurvePoints;
 
     private List<Transform> pointsArray;
@@ -32,7 +31,6 @@ public class MovingObject : MonoBehaviour {
     private int indexFromPosition;
     private int indexToPosition;
 
-    public Transform CheckpointsHolderTransform => checkpointsHolderTransform;
     public List<Transform> Points { get { return points; } set { points = value; } }
     public Transform ObjectTransform { get { return objectTransform; } set { objectTransform = value; } }
 

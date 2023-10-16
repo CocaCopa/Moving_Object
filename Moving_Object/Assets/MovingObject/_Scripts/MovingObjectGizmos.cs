@@ -3,14 +3,16 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(MovingObject))]
 [ExecuteInEditMode]
+[RequireComponent(typeof(MovingObject))]
 public class MovingObjectGizmos : MonoBehaviour {
+
+    [Tooltip("This helps the editor script to automatically assign any new created checkpoints to the 'Points' list")]
+    [SerializeField] private Transform checkpointsHolderTransform;
 
     private MovingObject movingObject;
     private int pointsHolderChildCount;
     private int pointsListCount;
-    private List<Transform> pointsList = new List<Transform>();
 
     private void Update() {
         if (movingObject == null)
@@ -30,26 +32,25 @@ public class MovingObjectGizmos : MonoBehaviour {
         if (movingObject == null)
             movingObject = GetComponent<MovingObject>();
 
-        ManagePlatform();
-        movingObject.Points.Clear();
-        
-        foreach (Transform checkpoint in movingObject.CheckpointsHolderTransform) {
-            movingObject.Points.Add(checkpoint);
-        }
+        //ManagePlatform();
+        AddCheckpointsToList();
         AutoAssignMovingObject();
     }
 
     private void AutoAssignCheckpointsToList() {
-        if (movingObject.CheckpointsHolderTransform != null) {
-            pointsHolderChildCount = movingObject.CheckpointsHolderTransform.childCount;
+        if (checkpointsHolderTransform != null) {
+            pointsHolderChildCount = checkpointsHolderTransform.childCount;
             pointsListCount = movingObject.Points.Count;
-
             if (pointsHolderChildCount != pointsListCount) {
-                movingObject.Points.Clear();
-                foreach (Transform checkpoint in movingObject.CheckpointsHolderTransform) {
-                    movingObject.Points.Add(checkpoint);
-                }
+                AddCheckpointsToList();
             }
+        }
+    }
+
+    private void AddCheckpointsToList() {
+        movingObject.Points.Clear();
+        foreach (Transform checkpoint in checkpointsHolderTransform) {
+            movingObject.Points.Add(checkpoint);
         }
     }
 
@@ -59,6 +60,13 @@ public class MovingObjectGizmos : MonoBehaviour {
         }
         else {
             movingObject.ObjectTransform = null;
+        }
+
+        if (movingObject.transform.childCount > 2) {
+            for (int i = 2; i < movingObject.transform.childCount; i++) {
+                GameObject excessiveChild = movingObject.transform.GetChild(i).gameObject;
+                DestroyImmediate(excessiveChild);
+            }
         }
     }
 
