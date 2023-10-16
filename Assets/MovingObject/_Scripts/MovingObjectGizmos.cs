@@ -1,12 +1,13 @@
 #if UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using System.Collections.Generic;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(MovingObject))]
 public class MovingObjectGizmos : MonoBehaviour {
 
+    [Space(10)]
     [Tooltip("This helps the editor script to automatically assign any new created checkpoints to the 'Points' list")]
     [SerializeField] private Transform checkpointsHolderTransform;
 
@@ -17,14 +18,12 @@ public class MovingObjectGizmos : MonoBehaviour {
     private void Update() {
         if (movingObject == null)
             movingObject = GetComponent<MovingObject>();
-        
-        if (EditorApplication.isPlaying) {
-            return;
-        }
 
-        ManagePlatform();
-        AutoAssignCheckpointsToList();
-        AutoAssignMovingObject();
+        if (!EditorApplication.isPlaying) {
+            ManagePlatform();
+            AutoAssignCheckpointsToList();
+            AutoAssignMovingObject();
+        }
     }
 
     private void OnValidate() {
@@ -32,7 +31,6 @@ public class MovingObjectGizmos : MonoBehaviour {
         if (movingObject == null)
             movingObject = GetComponent<MovingObject>();
 
-        //ManagePlatform();
         AddCheckpointsToList();
         AutoAssignMovingObject();
     }
@@ -40,7 +38,7 @@ public class MovingObjectGizmos : MonoBehaviour {
     private void AutoAssignCheckpointsToList() {
         if (checkpointsHolderTransform != null) {
             pointsHolderChildCount = checkpointsHolderTransform.childCount;
-            pointsListCount = movingObject.Points.Count;
+            pointsListCount = movingObject.Checkpoints.Count;
             if (pointsHolderChildCount != pointsListCount) {
                 AddCheckpointsToList();
             }
@@ -48,9 +46,9 @@ public class MovingObjectGizmos : MonoBehaviour {
     }
 
     private void AddCheckpointsToList() {
-        movingObject.Points.Clear();
+        movingObject.Checkpoints.Clear();
         foreach (Transform checkpoint in checkpointsHolderTransform) {
-            movingObject.Points.Add(checkpoint);
+            movingObject.Checkpoints.Add(checkpoint);
         }
     }
 
@@ -71,7 +69,7 @@ public class MovingObjectGizmos : MonoBehaviour {
     }
 
     private void ManagePlatform() {
-        List<Transform> points = movingObject.Points;
+        List<Transform> points = movingObject.Checkpoints;
         Transform platformTransform = movingObject.ObjectTransform;
         if (points != null && points.Count != 0) {
             if (platformTransform != null && Selection.activeGameObject == platformTransform.gameObject) {
@@ -84,8 +82,7 @@ public class MovingObjectGizmos : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
-
-        List<Transform> points = movingObject?.Points;
+        List<Transform> points = movingObject?.Checkpoints;
         if (points == null || points.Count == 0) return;
 
         for (int i = 0; i < points.Count; i++) {

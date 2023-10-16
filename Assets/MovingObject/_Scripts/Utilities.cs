@@ -22,14 +22,15 @@ namespace CocaCopa {
         }
 
         /// <summary>
-        /// Evaluate an animation curve based on the given distance and speed
+        /// Interpolate an animation curve based on distance and speed.
         /// </summary>
-        /// <param name="curve">Animation curve to be evaluated</param>
-        /// <param name="animationPoints">Animation points value to evaluate the given curve</param>
-        /// <param name="speed">Speed in m/s</param>
-        /// <param name="distance">Distance between the start/end point</param>
-        /// <param name="increment">Set to false, if you want the animation curve to be evaluated backwards</param>
-        /// <returns>The given curve, evaluated</returns>
+        /// <param name="curve">The animation curve to interpolate.</param>
+        /// <param name="animationPoints">The progression along the curve.</param>
+        /// <param name="speed">The speed of interpolation in meters per second (m/s).</param>
+        /// <param name="distance">The total distance covered by the animation.</param>
+        /// <param name="increment">Set to 'false' to interpolate in reverse.</param>
+        /// <returns>The value on the curve corresponding to the progression.
+        /// </returns>
         public static float EvaluateAnimationCurve(AnimationCurve curve, ref float animationPoints, float speed, float distance, bool increment = true) {
             if (increment)
                 animationPoints += (speed / distance) * Time.deltaTime;
@@ -48,17 +49,6 @@ namespace CocaCopa {
             Vector3 temp = vector_1;
             vector_1 = vector_2;
             vector_2 = temp;
-        }
-
-        /// <summary>
-        /// Swaps the values between the 2 given floats
-        /// </summary>
-        /// <param name="vector_1"></param>
-        /// <param name="vector_2"></param>
-        public static void SwapFloatValues(ref float float_1, ref float float_2) {
-            float temp = float_1;
-            float_1 = float_2;
-            float_2 = temp;
         }
     }
 }

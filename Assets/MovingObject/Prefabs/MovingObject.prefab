@@ -116,7 +116,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  platformSpeed: 5
+  objectSpeed: 5
   waitTime: 1
   points:
   - {fileID: 4389849106867506718}
