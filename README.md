@@ -14,7 +14,7 @@
 
 
 --------------------------------------------------------------------
------------------------------ SCRIPTING ----------------------------
+SCRIPTING
 --------------------------------------------------------------------
 MovingObject class provides the following properties:
 
@@ -36,7 +36,7 @@ All of these functions contain a summary to make it easier to understand their p
 
 
 --------------------------------------------------------------------
-------------------------------- NOTES ------------------------------
+--------------------------------- NOTES ---------------------------------
 --------------------------------------------------------------------
 1. Do not remove the 'MovingObjectGizmos' script from the provided 'MovingObject' prefab, as it contains the code responsible
    for visualizing the path of the object, based on the given checkpoints.
