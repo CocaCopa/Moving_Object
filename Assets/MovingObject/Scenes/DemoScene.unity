@@ -181,13 +181,17 @@ PrefabInstance:
       propertyPath: points.Array.data[4]
       value: 
       objectReference: {fileID: 416436242}
+    - target: {fileID: 68827945032871646, guid: 31dbae7c01398fb41805edbb68f36c0b, type: 3}
+      propertyPath: points.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 68827945032871646, guid: 31dbae7c01398fb41805edbb68f36c0b, type: 3}
+      propertyPath: points.Array.data[6]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1766274565478935893, guid: 31dbae7c01398fb41805edbb68f36c0b, type: 3}
       propertyPath: m_Name
       value: MovingObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 4389849106867506718, guid: 31dbae7c01398fb41805edbb68f36c0b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8418884578579523337, guid: 31dbae7c01398fb41805edbb68f36c0b, type: 3}
       propertyPath: m_RootOrder
