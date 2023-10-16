@@ -35,7 +35,7 @@ namespace CocaCopa {
                 animationPoints += (speed / distance) * Time.deltaTime;
             else
                 animationPoints -= (speed / distance) * Time.deltaTime;
-            animationPoints = Mathf.Clamp01(animationPoints);
+            animationPoints = float.IsNaN(animationPoints) ? 0 : Mathf.Clamp01(animationPoints);
             return curve.Evaluate(animationPoints);
         }
 
